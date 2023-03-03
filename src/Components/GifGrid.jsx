@@ -1,6 +1,8 @@
 
-import { GifItem } from './GifItem';
-import { useFetchGifs } from "../hooks/useFetchGifs";
+import { useEffect,useState } from 'react';
+import { getGifs } from '../Components/Helpers/getGifs';
+import {GifItem} from '../Components/GifItem';
+import {useFetchGifs} from '../hooks/useFetchGifs'
 
 //properties tenemos la category
  export const GifGrid = ({category}) => {
@@ -31,24 +33,22 @@ const {images,isLoading} = useFetchGifs(category);
 
 
   return (
-  <>
+      <>
           <h3>{category}</h3>
           {  // Esto es un and logico es como si fuera un if se es verdad sigue sino no continua con la ejecucion.
-            isLoading && (<h2>Cargando...</h2>)
+           // isLoading && (<h2>Cargando...</h2>)
           }
           
-        <div className = "card-grid">
+        <div className="card-grid">
 
           {
-             //HAsta que no cargue las imagenes no carga
-            images.map((image)=>(              //Otra forma de hacerlo
-              <GifItem key = {image.id}
-              // title={Image.title}
-              // url={Image.url}
-               //Otra forma de hacer para que tengamos todos los campos.
-              {...image}
-                />
-             ))  
+                  //HAsta que no cargue las imagenes no carga
+                   images.map((image)=> (
+                    <GifItem key={image.id}
+                             {...image}
+                   
+                    />
+                   ))
           }
             
         </div>
